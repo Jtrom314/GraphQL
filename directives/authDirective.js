@@ -29,9 +29,9 @@ function authDirective(directiveName, getUserFn) {
         [MapperKind.TYPE]: (type) => {
           const authDirective = getDirective(schema, type, directiveName)?.[0]
           if (authDirective) {
-            typeDirectiveArgumentMaps[type.name] = authDirective;
+            typeDirectiveArgumentMaps[type.name] = authDirective
           }
-          return undefined;
+          return undefined
         },
         [MapperKind.OBJECT_FIELD]: (fieldConfig, _fieldName, typeName) => {
           const authDirective = getDirective(schema, fieldConfig, directiveName)?.[0] ?? typeDirectiveArgumentMaps[typeName];

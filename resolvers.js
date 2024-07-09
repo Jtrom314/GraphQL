@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { lengthValidator } from './resolvers/lengthValidator.js'
 
 import db from './_db.js'
 
@@ -56,6 +57,10 @@ export const RESOLVERS = {
   },
   Mutation: {
     authenticate: (_, { name, password }) => {
+      const nameVal = lengthValidator(name, 6)
+      if (!nameVal.validate('MAX')) {
+        throw new Error('INVALID LENGTH')
+      }
       if (USERS[name] && USERS[name].password === password) {
         const PACKAGE = {
           name: name,
