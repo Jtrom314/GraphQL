@@ -34,13 +34,8 @@ export const TYPE_DEFS = [
     author(id: ID!): Author
   }
 
-  input authorize @upper {
-    username: String!
-    password: String!
-  }
-
   type Mutation {
-    authenticate(input: authorize): String 
+    authenticate(name: String!, password: String!): String 
   }
   `
 ]

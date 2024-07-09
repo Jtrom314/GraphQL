@@ -1,15 +1,19 @@
-export function lengthValidator (str, len) {
-  const validators = ['MIN', 'MAX', 'EXACT']
+const validators = Object.freeze({
+  MIN: 'MIN',
+  MAX: 'MAX',
+  EXACT: 'EXACT'
+})
+
+
+function lengthValidator (str, len) {
   return {
     validate: (validator) => {
-      const validatorIndex = validators.indexOf(validator)
-      if (validatorIndex === -1) return
       switch (validator) {
-        case 'MIN':
+        case validators.MIN:
           return str.length >= len
-        case 'MAX':
+        case validators.MAX:
           return str.length <= len
-        case 'EXACT':
+        case validators.EXACT:
           return str.length === len
         default:
           return false
@@ -17,3 +21,5 @@ export function lengthValidator (str, len) {
     }
   }
 }
+
+export { validators, lengthValidator }
