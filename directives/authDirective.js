@@ -34,11 +34,11 @@ function authDirective(directiveName, getUserFn) {
           return undefined
         },
         [MapperKind.OBJECT_FIELD]: (fieldConfig, _fieldName, typeName) => {
-          const authDirective = getDirective(schema, fieldConfig, directiveName)?.[0] ?? typeDirectiveArgumentMaps[typeName];
+          const authDirective = getDirective(schema, fieldConfig, directiveName)?.[0] ?? typeDirectiveArgumentMaps[typeName]
           if (authDirective) {
-            const { requires } = authDirective;
+            const { requires } = authDirective
             if (requires) {
-              const { resolve = defaultFieldResolver } = fieldConfig;
+              const { resolve = defaultFieldResolver } = fieldConfig
               fieldConfig.resolve = async function (source, args, context, info) {
                 try {
                   const encoded = context.headers['x-token']
@@ -60,13 +60,13 @@ function authDirective(directiveName, getUserFn) {
                     }
                   })
                 }
-              };
+              }
               return fieldConfig
             }
           }
-        },
-      }),
-  };
+        }
+      })
+  }
 }
 
 function getUser(token) {
@@ -80,6 +80,6 @@ function getUser(token) {
   }
 }
 
-const { authDirectiveTypeDefs, authDirectiveTransformer } = authDirective("auth", getUser);
+const { authDirectiveTypeDefs, authDirectiveTransformer } = authDirective("auth", getUser)
 
-export { authDirectiveTypeDefs, authDirectiveTransformer };
+export { authDirectiveTypeDefs, authDirectiveTransformer }
